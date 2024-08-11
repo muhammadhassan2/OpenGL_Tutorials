@@ -14,13 +14,16 @@
 
 using namespace std;
 
-GLfloat vertices[] = { 
+GLfloat vertices[] = {
 	// Pos                 // Color
-	0.0f , .5f ,0.0f,      1.0f ,0.0f ,0.0f, 
+	0.0f , .5f ,0.0f,      1.0f ,0.0f ,0.0f,
 	-.5f ,-.5f ,0.0f,      0.0f ,1.0f ,0.0f,
 	.5f , -.5f , 0.0f,      0.0f ,0.0f ,1.0f
 };
 
+GLfloat texVertices[] = {
+	 1.0
+};
 int main() {
 
 	window mWindow(WindowWidth,WindowHeight);

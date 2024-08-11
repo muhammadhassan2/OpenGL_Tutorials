@@ -9,7 +9,7 @@
 #include<istream>
 using namespace std;
 
-const GLuint WindowWidth = 720.0, WindowHeight = 720.0;
+const GLuint WindowWidth = 720, WindowHeight = 720;
 
 enum class shaderType{VERTEX , FRAGMENT ,PROGRAM};
 
