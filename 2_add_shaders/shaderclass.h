@@ -1,14 +1,9 @@
 #pragma once
 #include<iostream>
 #include<string>
-#include<sstream>
-#include<fstream>
-#include<istream>
 #include"Helper.h"
 #include<./glad/glad.h>
 #include<./GLFW/glfw3.h>
-
-std::string get_file_contents(const char* filename);
 
 class Shader {
 

@@ -1,6 +1,6 @@
 #include"shaderclass.h"
 
-std::string get_file_contents(const char* filename)
+inline std::string get_file_contents(const char* filename)
 {
 	std::ifstream in(filename, std::ios::binary);
 	if (in)
@@ -15,15 +15,16 @@ std::string get_file_contents(const char* filename)
 	}
 	else {
 		std::cout << "Can't fine the file\n";
+		return "";
 	}
+
 	//throw(errno);
 }
-
 Shader::Shader(const char *vertexShader_ , const char *fragmentShader_) {
 
 	this->vertexCode = get_file_contents(vertexShader_);
 	this->fragmentCode = get_file_contents(fragmentShader_);
-
+	
 
 	const char* vertexSource,* fragmentSource;
 

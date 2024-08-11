@@ -1,7 +1,16 @@
 #pragma once
 
 #include<iostream>
-
+#include"./glad/glad.h"
+#include"./GLFW/glfw3.h"
+#include<string>
+#include<sstream>
+#include<fstream>
+#include<istream>
 using namespace std;
 
 enum class shaderType{VERTEX , FRAGMENT ,PROGRAM};
+
+inline std::string get_file_contents(const char* filename);
+
+
