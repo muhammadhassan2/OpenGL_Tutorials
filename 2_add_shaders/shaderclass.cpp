@@ -98,10 +98,21 @@ void Shader::compileErrors(GLuint shaderId ,shaderType type ) {
 }
 void Shader::setFloat(const std::string &uniform_name , float value) {
 
+	GLuint Id = glGetUniformLocation(this->programID, uniform_name.c_str());
+
+	if (Id) {
+		glUniform1f(Id,value);
+	}
+
 }
 
 void Shader::setInt(const std::string& uniform_name, int value) {
 
+	GLuint Id = glGetUniformLocation(this->programID, uniform_name.c_str());
+
+	if (Id) {
+		glUniform1f(Id, value);
+	}
 }
 
 void Shader::Activate() {
@@ -110,4 +121,8 @@ void Shader::Activate() {
 
 void Shader::Delete() {
 	glDeleteProgram(programID);
+}
+
+GLuint Shader::getShaderProgramId() const {
+	return this->programID;
 }

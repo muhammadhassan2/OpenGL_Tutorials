@@ -19,6 +19,8 @@ public:
 	void compileErrors(GLuint shaderId , shaderType type);
 	void setFloat(const std::string &uniform_name ,float value);
 	void setInt(const std::string &uniform_name ,int value);
+
+	GLuint getShaderProgramId() const;
 	std::string vertexCode, fragmentCode;
 
 	GLuint programID;

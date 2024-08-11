@@ -3,9 +3,8 @@
 #include"./GLFW/glfw3.h"
 #include "Helper.h"
 #include"shaderclass.h"
+#include "window.h"
 using namespace std;
-
-const GLuint WIDTH = 720.0, HEIGHT = 720.0;
 
 GLfloat vertices[] = {
 	0.0f , .5f ,0.0f,
@@ -15,29 +14,7 @@ GLfloat vertices[] = {
 
 int main() {
 
-	glfwInit();
-
-	if (!glfwInit()) {
-		std::cout << "ERROR-Can't Initiate glfw \n";
-		glfwTerminate();
-	}
-
-	// seeting the glfw opengl context 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	// create a glfw window to render on
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "my_app", NULL, NULL);
-
-
-	if (!window) {
-		std::cout << "ERROR-Can't Create a GLFW Window\n";
-		glfwTerminate();
-	}
-
-	glfwMakeContextCurrent(window);
-	gladLoadGL();
+	window mWindow(WindowWidth,WindowHeight);
 
 	GLuint VAO, VBO;
 
@@ -56,7 +33,7 @@ int main() {
 
 	Shader Shaderclass("vertex.vert","fragment.frag");
 
-	while (!glfwWindowShouldClose(window)) {
+	while (!mWindow.shouldClose()) {
 
 		glClearColor(.1f, .2f, .3f, 1.0f);
 
@@ -64,13 +41,8 @@ int main() {
 		Shaderclass.Activate();
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glfwSwapBuffers(window);
-
-		glfwPollEvents();
-
+		mWindow.update();
 	}
 
 
-
-	glfwTerminate();
 }
