@@ -4,6 +4,11 @@
 #include "Helper.h"
 #include"shaderclass.h"
 #include "window.h"
+// GLM
+#include <./glm/glm.hpp>
+#include <./glm/gtc/matrix_transform.hpp>
+#include <./glm/gtc/type_ptr.hpp>
+
 using namespace std;
 
 GLfloat vertices[] = {
@@ -15,7 +20,7 @@ GLfloat vertices[] = {
 int main() {
 
 	window mWindow(WindowWidth,WindowHeight);
-
+	glm::vec3(1.0);
 	GLuint VAO, VBO;
 
 	glGenVertexArrays(1, &VAO);
@@ -37,7 +42,7 @@ int main() {
 
 	while (!mWindow.shouldClose()) {
 		float time = glfwGetTime();
-		Shaderclass.setFloat("time",sin(time));
+		//Shaderclass.setFloat("time",sin(time));
 
 		glClearColor(.1f, .2f, .3f, 1.0f);
 		if (mWindow.getKey(GLFW_KEY_W) == true) {
