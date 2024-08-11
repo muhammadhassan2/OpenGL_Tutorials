@@ -9,18 +9,21 @@
 #include <./glm/gtc/matrix_transform.hpp>
 #include <./glm/gtc/type_ptr.hpp>
 
+//images
+#include<./stb/stb_image.h>
+
 using namespace std;
 
-GLfloat vertices[] = {
-	0.0f , .5f ,0.0f,
-	-.5f ,-.5f ,0.0f,
-	.5f , -.5f , 0.0f
+GLfloat vertices[] = { 
+	// Pos                 // Color
+	0.0f , .5f ,0.0f,      1.0f ,0.0f ,0.0f, 
+	-.5f ,-.5f ,0.0f,      0.0f ,1.0f ,0.0f,
+	.5f , -.5f , 0.0f,      0.0f ,0.0f ,1.0f
 };
 
 int main() {
 
 	window mWindow(WindowWidth,WindowHeight);
-	glm::vec3(1.0);
 	GLuint VAO, VBO;
 
 	glGenVertexArrays(1, &VAO);
@@ -32,10 +35,10 @@ int main() {
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6 * sizeof(float),(void*) (3*sizeof(float)));
 	glEnableVertexAttribArray(0);
-
+	glEnableVertexAttribArray(1);
 	Shader Shaderclass("vertex.vert","fragment.frag");
 	GLuint currentPressedKey;
 
