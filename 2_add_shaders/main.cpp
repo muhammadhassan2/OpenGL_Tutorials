@@ -1,6 +1,8 @@
 #include<iostream>
 #include"./glad/glad.h"
 #include"./GLFW/glfw3.h"
+
+#include"shaderclass.h"
 using namespace std;
 
 const GLuint WIDTH = 720.0, HEIGHT = 720.0;
@@ -52,13 +54,14 @@ int main() {
 
 	glEnableVertexAttribArray(0);
 
+	Shader Shaderclass("vertex.vert","fragment.frag");
 
 	while (!glfwWindowShouldClose(window)) {
 
 		glClearColor(.1f, .2f, .3f, 1.0f);
 
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		Shaderclass.Activate();
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwSwapBuffers(window);

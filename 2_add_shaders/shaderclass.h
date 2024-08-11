@@ -18,7 +18,7 @@ private:
 public:
 
 	Shader(const char *vertexShade , const char *fragmentShader);
-	void createProgram();
+	void createProgram(const GLuint vertex ,const GLuint fragment);
 	void Activate();
 	void Delete();
 	void compileErrors(GLuint shaderId , shaderType type);

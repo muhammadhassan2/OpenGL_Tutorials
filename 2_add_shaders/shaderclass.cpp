@@ -13,7 +13,10 @@ std::string get_file_contents(const char* filename)
 		in.close();
 		return(contents);
 	}
-	throw(errno);
+	else {
+		std::cout << "Can't fine the file\n";
+	}
+	//throw(errno);
 }
 
 Shader::Shader(const char *vertexShader_ , const char *fragmentShader_) {
@@ -36,21 +39,60 @@ Shader::Shader(const char *vertexShader_ , const char *fragmentShader_) {
 	glCompileShader(vertexShader);
 	glCompileShader(fragmentShader);
 
+	this->compileErrors(vertexShader,shaderType::VERTEX);
+	this->compileErrors(fragmentShader, shaderType::FRAGMENT);
 
+	this->programID = glCreateProgram();
+	glAttachShader(this->programID, vertexShader);
+	glAttachShader(this->programID, fragmentShader);
+	glLinkProgram(this->programID);
 
+	this->compileErrors(this->programID, shaderType::PROGRAM);
+}
+
+void Shader::createProgram(const GLuint vertex ,const GLuint fragment) {
+
+	this->programID = glCreateProgram();
+	glAttachShader(this->programID, vertex);
+	glAttachShader(this->programID, fragment);
+	glLinkProgram(this->programID);
+
+	this->compileErrors(this->programID, shaderType::PROGRAM);
+	
 }
 void Shader::compileErrors(GLuint shaderId ,shaderType type ) {
 
-	if (type == shaderType::VERTEX) {
+	char infoLogs[1024];
+	int sucess;
 
+	if (type == shaderType::VERTEX) {
+		glGetShaderiv(shaderId,GL_COMPILE_STATUS,&sucess);
+
+		if (!sucess) {
+			glGetShaderInfoLog(shaderId, 1024,NULL , infoLogs);
+			std::cout << "Failed to Compile the Vertex Shader\n";
+
+		}
 
 	}
 	else if (type == shaderType::FRAGMENT) {
+		glGetShaderiv(shaderId, GL_COMPILE_STATUS, &sucess);
 
+		if (!sucess) {
+			glGetShaderInfoLog(shaderId,1024,NULL,infoLogs);
+			std::cout << "Failed to Compile the Fragment Shader\n";
+		}
 	}
 	else if (type == shaderType::PROGRAM) {
 
+		glGetProgramiv(shaderId,GL_LINK_STATUS,&sucess);
+
+		if (!sucess) {
+			glGetProgramInfoLog(shaderId,1024,NULL,infoLogs);
+			std::cout << "Failed to Link the Shader Program\n";
+		}
 	}
+
 
 }
 void Shader::setFloat(const std::string &uniform_name , float value) {
