@@ -100,9 +100,10 @@ void Shader::setFloat(const std::string &uniform_name , float value) {
 
 	GLuint Id = glGetUniformLocation(this->programID, uniform_name.c_str());
 
-	if (Id) {
+	//if (Id) {
+		std::cout << "pass float\n";
 		glUniform1f(Id,value);
-	}
+	//}
 
 }
 

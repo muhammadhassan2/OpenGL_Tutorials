@@ -11,8 +11,12 @@ private:
 public:
 	window(GLuint width, GLuint height);
 	~window();
+	GLuint mWidth, mHeight;
 	bool shouldClose() const ;
 	void update();
+	void KeyCallback(int key, int action);
+	void closeWindow();
+	bool getKey(int key);
 	GLFWwindow* mWindow;
 	void Initiate();
 

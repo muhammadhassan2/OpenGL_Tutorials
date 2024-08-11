@@ -8,8 +8,8 @@ using namespace std;
 
 GLfloat vertices[] = {
 	0.0f , .5f ,0.0f,
-	-.5f ,.5f ,0.0f,
-	.5f , -.3f , 0.0f
+	-.5f ,-.5f ,0.0f,
+	.5f , -.5f , 0.0f
 };
 
 int main() {
@@ -32,10 +32,19 @@ int main() {
 	glEnableVertexAttribArray(0);
 
 	Shader Shaderclass("vertex.vert","fragment.frag");
+	GLuint currentPressedKey;
+
 
 	while (!mWindow.shouldClose()) {
+		float time = glfwGetTime();
+		Shaderclass.setFloat("time",sin(time));
 
 		glClearColor(.1f, .2f, .3f, 1.0f);
+		if (mWindow.getKey(GLFW_KEY_W) == true) {
+			std::cout << "The pressed key is W\n";
+			Shaderclass.setFloat("move_up", .1);
+		}
+
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		Shaderclass.Activate();
