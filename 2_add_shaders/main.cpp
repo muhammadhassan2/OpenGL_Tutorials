@@ -64,7 +64,7 @@ int main() {
 
 	while (!mWindow.shouldClose()) {
 		float time = glfwGetTime();
-		//Shaderclass.setFloat("time",sin(time));
+		Shaderclass.setFloat("time",sin(time));
 
 		glClearColor(.1f, .2f, .3f, 1.0f);
 		if (mWindow.getKey(GLFW_KEY_W) == true) {
@@ -72,7 +72,7 @@ int main() {
 			Shaderclass.setFloat("move_up", .1);
 		}
 
-		//Cat.bind();
+		Cat.bind();
 		glClear(GL_COLOR_BUFFER_BIT);
 		Shaderclass.Activate();
 		glBindVertexArray(VAO);
