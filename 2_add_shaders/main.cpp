@@ -12,7 +12,6 @@
 
 //images
 #include<stb/stb_image.h>
-
 using namespace std;
 
 GLfloat vertices[] = {
@@ -55,13 +54,13 @@ int main() {
 	glEnableVertexAttribArray(2);
 	Shader Shaderclass("vertex.vert","fragment.frag");
 	GLuint currentPressedKey;
-
-	// handel textures
-	int texWidth, texHeight ,texCahnnels;
-	unsigned char* data = stbi_load("G:\\pop_cat.png", &texWidth, &texHeight, &texCahnnels,0);
 	
 	Texture Cat("G:\\pop_cat.png",GL_TEXTURE_2D,GL_TEXTURE0);
-
+	Texture myImage("G:\\qa.jpg", GL_TEXTURE_2D, GL_TEXTURE1);
+	Cat.texUnit(Shaderclass, "tex0", 0);
+	myImage.texUnit(Shaderclass, "tex1", 1);
+	//Shaderclass.setInt("tex0", 0);
+	//Shaderclass.setInt("tex1", 1);
 	while (!mWindow.shouldClose()) {
 		float time = glfwGetTime();
 		Shaderclass.setFloat("time",sin(time));
@@ -72,7 +71,9 @@ int main() {
 			Shaderclass.setFloat("move_up", .1);
 		}
 
-		Cat.bind();
+	    Cat.bind();
+		myImage.bind();
+
 		glClear(GL_COLOR_BUFFER_BIT);
 		Shaderclass.Activate();
 		glBindVertexArray(VAO);

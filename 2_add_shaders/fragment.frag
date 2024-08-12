@@ -1,10 +1,12 @@
 #version 330 core
 out vec4 FragColor;
 in vec2 tc;
-uniform sampler2D ourTexture;
-
+uniform sampler2D tex0;
+uniform sampler2D tex1;
+uniform float time;
 void main()
 {
-   vec4 tex = texture2D(ourTexture,1.0 -tc);
-   FragColor = vec4(tex.r,tex.g,tex.b,tex.z);
+   vec4 tex_1 = texture2D(tex0, tc);
+    vec4 tex_2 = texture2D(tex1, tc);
+   FragColor = mix(tex_1,tex_1,sin(time));       // Simple mix of two textures
 }

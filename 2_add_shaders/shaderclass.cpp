@@ -112,9 +112,10 @@ void Shader::setInt(const std::string& uniform_name, int value) {
 	GLuint Id = glGetUniformLocation(this->programID, uniform_name.c_str());
 
 	if (Id) {
-		glUniform1f(Id, value);
+		glUniform1i(Id, value);
 	}
 }
+
 
 void Shader::Activate() {
 	glUseProgram(programID);
