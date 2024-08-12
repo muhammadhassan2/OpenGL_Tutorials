@@ -4,6 +4,7 @@
 #include "Helper.h"
 #include"shaderclass.h"
 #include "window.h"
+#include"texture.h"
 // GLM
 #include <./glm/glm.hpp>
 #include <./glm/gtc/matrix_transform.hpp>
@@ -59,33 +60,8 @@ int main() {
 	int texWidth, texHeight ,texCahnnels;
 	unsigned char* data = stbi_load("G:\\pop_cat.png", &texWidth, &texHeight, &texCahnnels,0);
 	
-	GLuint texture;
-	glGenTextures(1,&texture);
-	glActiveTexture(GL_TEXTURE0); // Activate the texture unit first
+	Texture Cat("G:\\pop_cat.png",GL_TEXTURE_2D,GL_TEXTURE0);
 
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	GLint textureFormat;
-	GLenum format;
-	if (texCahnnels == 1) {
-		textureFormat = format = GL_RED;
-	}
-	if (texCahnnels == 3) {
-		textureFormat = format = GL_RGB;
-	}
-	if (texCahnnels == 4) {
-		textureFormat = format = GL_RGBA;
-	}
-	glTexImage2D(GL_TEXTURE_2D,0,textureFormat,texWidth,texHeight,0,format, GL_UNSIGNED_BYTE,data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // For wrapping in the S (or X) direction
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // For wrapping in the T (or Y) direction
-
-	// Set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // For scaling down
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // For scaling up
-
-	glGenerateMipmap(GL_TEXTURE_2D);
-	
 	while (!mWindow.shouldClose()) {
 		float time = glfwGetTime();
 		//Shaderclass.setFloat("time",sin(time));
@@ -96,8 +72,7 @@ int main() {
 			Shaderclass.setFloat("move_up", .1);
 		}
 
-		glBindTexture(GL_TEXTURE_2D, texture);
-
+		//Cat.bind();
 		glClear(GL_COLOR_BUFFER_BIT);
 		Shaderclass.Activate();
 		glBindVertexArray(VAO);
