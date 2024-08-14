@@ -13,7 +13,7 @@ public:
 	Texture(const char * texturePath, GLenum texType, GLenum slot);
 	GLenum getTextureFormat();
 	void texUnit(Shader& shader, const char* uniform, GLuint unit);
-	void bind();
+	void bind(GLuint unit);
 	unsigned char* data;
 	GLuint textureID;
 	int texWidth, texHeight, texChannels;

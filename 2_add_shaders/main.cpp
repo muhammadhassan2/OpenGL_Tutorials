@@ -57,11 +57,10 @@ int main() {
 	
 	Texture Cat("G:\\pop_cat.png",GL_TEXTURE_2D,GL_TEXTURE0);
 	Texture myImage("G:\\qa.jpg", GL_TEXTURE_2D, GL_TEXTURE1);
-	Cat.texUnit(Shaderclass, "tex0", 0);
-	myImage.texUnit(Shaderclass, "tex1", 1);
-	//Shaderclass.setInt("tex0", 0);
-	//Shaderclass.setInt("tex1", 1);
+	
 	while (!mWindow.shouldClose()) {
+		Cat.texUnit(Shaderclass, "tex0", 0);
+	    myImage.texUnit(Shaderclass, "tex1", 1);
 		float time = glfwGetTime();
 		Shaderclass.setFloat("time",sin(time));
 
@@ -71,8 +70,8 @@ int main() {
 			Shaderclass.setFloat("move_up", .1);
 		}
 
-	    Cat.bind();
-		myImage.bind();
+	    Cat.bind(GL_TEXTURE0);
+		myImage.bind(GL_TEXTURE1);
 
 		glClear(GL_COLOR_BUFFER_BIT);
 		Shaderclass.Activate();

@@ -8,5 +8,5 @@ void main()
 {
    vec4 tex_1 = texture2D(tex0, tc);
     vec4 tex_2 = texture2D(tex1, tc);
-   FragColor = mix(tex_1,tex_1,sin(time));       // Simple mix of two textures
+   FragColor = mix(tex_1,tex_2,sin(time));       // Simple mix of two textures
 }
